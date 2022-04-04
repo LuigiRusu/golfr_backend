@@ -12,6 +12,12 @@ class ApplicationController < ActionController::API
     }, status: :unauthorized
   end
 
+  def current_token
+    request.env['warden-jwt_auth.token']
+  end
+
+  private
+
   def find_by_id(id)
     user = User.find_by(id: id)
 
@@ -23,9 +29,5 @@ class ApplicationController < ActionController::API
     end
 
     user
-  end
-
-  def current_token
-    request.env['warden-jwt_auth.token']
   end
 end
